@@ -35,6 +35,8 @@ import com.pedro.encoder.utils.gl.GlUtil;
 import com.pedro.library.R;
 import com.pedro.library.util.Filter;
 
+import java.util.List;
+
 /**
  * Created by pedro on 9/09/17.
  */
@@ -113,6 +115,11 @@ public class OpenGlView extends OpenGlViewBase {
   @Override
   public void setFilter(BaseFilterRender baseFilterRender) {
     filterQueue.add(new Filter(FilterAction.SET, 0, baseFilterRender));
+  }
+
+  @Override
+  public List<BaseFilterRender> getFilters() {
+    return managerRender.getFilters();
   }
 
   @Override

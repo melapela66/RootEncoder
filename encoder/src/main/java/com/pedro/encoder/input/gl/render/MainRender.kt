@@ -157,6 +157,8 @@ class MainRender {
     return filterRenders.size
   }
 
+  fun getFilters() = filterRenders
+
   fun setPreviewSize(previewWidth: Int, previewHeight: Int) {
     for (i in filterRenders.indices) {
       filterRenders[i].setPreviewSize(previewWidth, previewHeight)

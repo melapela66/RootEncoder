@@ -290,12 +290,16 @@ class GlStreamInterface(private val context: Context) : Runnable, OnFrameAvailab
     return managerRender.filtersCount()
   }
 
+  override fun getFilters(): List<BaseFilterRender> {
+    return managerRender.getFilters()
+  }
+
   override fun enableAA(aaEnabled: Boolean) {
     managerRender.enableAA(aaEnabled)
   }
 
   override fun setRotation(rotation: Int) {
-    managerRender.setCameraRotation(rotation);
+    managerRender.setCameraRotation(rotation)
   }
 
   override fun setIsStreamHorizontalFlip(flip: Boolean) {
@@ -314,7 +318,7 @@ class GlStreamInterface(private val context: Context) : Runnable, OnFrameAvailab
     isPreviewVerticalFlip = flip
   }
 
-  override fun isAAEnabled(): Boolean = managerRender.isAAEnabled();
+  override fun isAAEnabled(): Boolean = managerRender.isAAEnabled()
 
   override fun setFilter(baseFilterRender: BaseFilterRender?) {
     filterQueue.add(Filter(FilterAction.SET, 0, baseFilterRender))

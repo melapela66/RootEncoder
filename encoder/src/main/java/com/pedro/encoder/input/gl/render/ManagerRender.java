@@ -202,6 +202,10 @@ public class ManagerRender {
     return filterRenders.size();
   }
 
+  public List<BaseFilterRender> getFilters() {
+    return filterRenders;
+  }
+
   public void setCameraRotation(int rotation) {
     cameraRender.setRotation(rotation);
   }

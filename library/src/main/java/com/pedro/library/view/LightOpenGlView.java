@@ -33,6 +33,9 @@ import com.pedro.encoder.utils.gl.AspectRatioMode;
 import com.pedro.encoder.utils.gl.GlUtil;
 import com.pedro.library.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by pedro on 21/02/18.
  *
@@ -180,6 +183,11 @@ public class LightOpenGlView extends OpenGlViewBase {
   @Override
   public void setFilter(BaseFilterRender baseFilterRender) {
     addFilter(baseFilterRender);
+  }
+
+  @Override
+  public List<BaseFilterRender> getFilters() {
+    return new ArrayList<>();
   }
 
   @Override

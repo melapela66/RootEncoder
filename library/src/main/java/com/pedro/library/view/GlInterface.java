@@ -22,6 +22,8 @@ import android.view.Surface;
 
 import com.pedro.encoder.input.gl.render.filters.BaseFilterRender;
 
+import java.util.List;
+
 public interface GlInterface {
 
   /**
@@ -119,7 +121,12 @@ public interface GlInterface {
    * @param baseFilterRender filter to set.
    */
   void setFilter(BaseFilterRender baseFilterRender);
-  
+
+  /**
+   * @return all filters contained in this GlInterface
+   */
+  List<BaseFilterRender> getFilters();
+
   /**
    * Enable or disable Anti aliasing (This method use FXAA).
    *

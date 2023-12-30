@@ -221,7 +221,7 @@ abstract class StreamBase(
     isOnPreview = true
     if (!glInterface.running) glInterface.start()
     if (!videoManager.isRunning()) {
-      videoManager.start(glInterface.getSurfaceTexture())
+      videoManager.start(glInterface.surfaceTexture)
     }
     glInterface.attachPreview(surface)
     glInterface.setPreviewResolution(width, height)
@@ -491,7 +491,7 @@ abstract class StreamBase(
     if (videoSource != VideoManager.Source.DISABLED) {
       throw IllegalStateException("getSurfaceTexture only available with VideoManager.Source.DISABLED")
     }
-    return glInterface.getSurfaceTexture()
+    return glInterface.surfaceTexture
   }
 
   protected fun getVideoResolution() = Size(videoEncoder.width, videoEncoder.height)
@@ -501,7 +501,7 @@ abstract class StreamBase(
   private fun startSources() {
     if (!glInterface.running) glInterface.start()
     if (!videoManager.isRunning()) {
-      videoManager.start(glInterface.getSurfaceTexture())
+      videoManager.start(glInterface.surfaceTexture)
     }
     audioManager.start()
     videoEncoder.start()
