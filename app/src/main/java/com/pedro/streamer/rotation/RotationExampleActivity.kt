@@ -56,6 +56,8 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
     super.onCreate(savedInstanceState)
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     binding = ActivityExampleBinding.inflate(layoutInflater)
+    usb = CameraUSBSource(this)
+    usb?.register()
     setContentView(binding.root)
     binding.etRtpUrl.setHint(R.string.hint_rtmp)
     binding.surfaceView.holder.addCallback(this)
@@ -96,10 +98,17 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
     }
   }
 
+  override fun onDestroy() {
+    super.onDestroy()
+    usb?.unregister()
+  }
+
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.rotation_menu, menu)
     return true
   }
+
+  private var usb: CameraUSBSource? = null
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
@@ -110,7 +119,7 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
         service?.changeVideoSource(Camera2Source(applicationContext))
       }
       R.id.video_source_camerax -> {
-        service?.changeVideoSource(CameraXSource(applicationContext))
+        service?.changeVideoSource(usb!!)
       }
       R.id.video_source_screen -> {
         askingMediaProjection = true

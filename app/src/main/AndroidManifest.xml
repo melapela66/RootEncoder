@@ -102,7 +102,16 @@
     <activity android:name="com.pedro.streamer.rotation.RotationExampleActivity"
         android:label="@string/rotation_rtmp"
         android:screenOrientation="fullSensor"
-        />
+        android:exported="true">
+      <intent-filter>
+        <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+      <meta-data
+          android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+          android:resource="@xml/device_filterall"
+          />
+    </activity>
 
     <service android:name="com.pedro.streamer.rotation.StreamService"
         android:foregroundServiceType="mediaProjection|camera|microphone"
