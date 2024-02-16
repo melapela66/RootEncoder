@@ -67,7 +67,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
   private final String[] PERMISSIONS = {
       Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA,
-      Manifest.permission.WRITE_EXTERNAL_STORAGE
+      Manifest.permission.WRITE_EXTERNAL_STORAGE,
+      Manifest.permission.READ_MEDIA_AUDIO,
+      Manifest.permission.READ_MEDIA_VIDEO,
+      Manifest.permission.READ_MEDIA_IMAGES,
+      Manifest.permission.ACCESS_NETWORK_STATE,
+      Manifest.permission.ACCESS_WIFI_STATE,
   };
 
   @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)

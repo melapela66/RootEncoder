@@ -16,6 +16,10 @@
                 android:id="@+id/video_source_camerax"
                 />
             <item
+                android:title="@string/camera_usb"
+                android:id="@+id/video_source_camera_usb"
+                />
+            <item
                 android:title="@string/screen"
                 android:id="@+id/video_source_screen"
                 />

@@ -8,7 +8,7 @@ android {
   defaultConfig {
     applicationId "com.pedro.streamer"
     minSdkVersion 19
-    targetSdkVersion 34
+    targetSdkVersion 33
     versionCode version_code
     versionName version_name
     multiDexEnabled true
@@ -43,5 +43,8 @@ dependencies {
   implementation "androidx.camera:camera-camera2:${camerax_version}"
   implementation "androidx.camera:camera-lifecycle:${camerax_version}"
 
-  implementation group: 'com.serenegiant.uvccamera', name: 'libuvccamera', version: '1.2.0'
+  def usbcam_version = "v3.4.0-rc1"
+  implementation "com.github.ronaldsampaio.AndroidUSBCamera:libausbc:$usbcam_version"
+  implementation "com.github.ronaldsampaio.AndroidUSBCamera:libnative:$usbcam_version"
+  implementation "com.github.ronaldsampaio.AndroidUSBCamera:libuvc:$usbcam_version"
 }

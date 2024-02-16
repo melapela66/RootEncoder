@@ -20,6 +20,7 @@ import android.content.Context
 import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import android.os.Build
+import android.util.Log
 import android.util.Range
 import android.util.Size
 import android.view.MotionEvent
@@ -50,6 +51,7 @@ class Camera1Source(context: Context): VideoSource() {
     if (!isRunning()) {
       surfaceTexture.setDefaultBufferSize(width, height)
       camera.setSurfaceTexture(surfaceTexture)
+      Log.e("Pedro", "$width x $height, $fps")
       camera.start(facing, width, height, fps)
       camera.setPreviewOrientation(90) // necessary to use the same orientation than camera2
     }

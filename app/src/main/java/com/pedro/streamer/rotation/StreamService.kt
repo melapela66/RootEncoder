@@ -36,7 +36,9 @@ import com.pedro.library.util.sources.audio.AudioSource
 import com.pedro.library.util.sources.video.Camera1Source
 import com.pedro.library.util.sources.video.Camera2Source
 import com.pedro.library.util.sources.video.VideoSource
+import com.pedro.library.view.OrientationForced
 import com.pedro.streamer.R
+import com.pedro.streamer.rotation.usb.CameraUsbSource
 
 /**
  * Created by pedro on 22/3/22.
@@ -79,7 +81,7 @@ class StreamService: Service(), ConnectChecker {
 
     sensorRotationManager = SensorRotationManager(applicationContext) {
       //0 = portrait, 90 = landscape, 180 = reverse portrait, 270 = reverse landscape
-      if (currentOrientation != it) {
+      if (currentOrientation != it && rtmpCamera?.videoSource !is CameraUsbSource) {
         rtmpCamera?.setOrientation(it)
         currentOrientation = it
       }
@@ -175,6 +177,12 @@ class StreamService: Service(), ConnectChecker {
 
   fun changeVideoSource(source: VideoSource) {
     rtmpCamera?.changeVideoSource(source)
+    if (source is CameraUsbSource) {
+      rtmpCamera?.getGlInterface()?.forceOrientation(OrientationForced.LANDSCAPE)
+    } else {
+      rtmpCamera?.getGlInterface()?.forceOrientation(OrientationForced.NONE)
+      rtmpCamera?.setOrientation(currentOrientation)
+    }
   }
 
   fun changeAudioSource(source: AudioSource) {

@@ -66,6 +66,7 @@ class CameraXSource(
             ).build()
         ).build()
       lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      created = true
       return true
     } catch (e: IllegalArgumentException) {
       return false

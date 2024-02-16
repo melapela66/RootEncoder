@@ -36,6 +36,7 @@ import com.pedro.library.util.sources.video.Camera2Source
 import com.pedro.library.util.sources.video.ScreenSource
 import com.pedro.streamer.R
 import com.pedro.streamer.databinding.ActivityExampleBinding
+import com.pedro.streamer.rotation.usb.CameraUsbSource
 import com.pedro.streamer.utils.PathUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -56,8 +57,6 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
     super.onCreate(savedInstanceState)
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     binding = ActivityExampleBinding.inflate(layoutInflater)
-    usb = CameraUSBSource(this)
-    usb?.register()
     setContentView(binding.root)
     binding.etRtpUrl.setHint(R.string.hint_rtmp)
     binding.surfaceView.holder.addCallback(this)
@@ -100,15 +99,12 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
 
   override fun onDestroy() {
     super.onDestroy()
-    usb?.unregister()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.rotation_menu, menu)
     return true
   }
-
-  private var usb: CameraUSBSource? = null
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
@@ -119,7 +115,10 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
         service?.changeVideoSource(Camera2Source(applicationContext))
       }
       R.id.video_source_camerax -> {
-        service?.changeVideoSource(usb!!)
+        service?.changeVideoSource(CameraXSource(applicationContext))
+      }
+      R.id.video_source_camera_usb -> {
+        service?.changeVideoSource(CameraUsbSource(applicationContext))
       }
       R.id.video_source_screen -> {
         askingMediaProjection = true
