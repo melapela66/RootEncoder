@@ -36,7 +36,6 @@ import com.pedro.library.util.sources.video.Camera2Source
 import com.pedro.library.util.sources.video.ScreenSource
 import com.pedro.streamer.R
 import com.pedro.streamer.databinding.ActivityExampleBinding
-import com.pedro.streamer.rotation.usb.CameraUsbSource
 import com.pedro.streamer.utils.PathUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -118,7 +117,7 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
         service?.changeVideoSource(CameraXSource(applicationContext))
       }
       R.id.video_source_camera_usb -> {
-        service?.changeVideoSource(CameraUsbSource(applicationContext))
+        service?.changeVideoSource(CameraUsbSource(this))
       }
       R.id.video_source_screen -> {
         askingMediaProjection = true

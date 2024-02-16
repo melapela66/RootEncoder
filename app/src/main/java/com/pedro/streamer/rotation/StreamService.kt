@@ -38,7 +38,6 @@ import com.pedro.library.util.sources.video.Camera2Source
 import com.pedro.library.util.sources.video.VideoSource
 import com.pedro.library.view.OrientationForced
 import com.pedro.streamer.R
-import com.pedro.streamer.rotation.usb.CameraUsbSource
 
 /**
  * Created by pedro on 22/3/22.

@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-package com.pedro.streamer.rotation.usb
+package com.pedro.streamer.rotation
 
 import android.content.Context
 import android.graphics.SurfaceTexture
-import android.os.Message
+import com.jiangdg.ausbc.CameraClient
 import com.jiangdg.ausbc.camera.CameraUvcStrategy
-import com.jiangdg.ausbc.camera.ICameraStrategy
 import com.jiangdg.ausbc.camera.bean.CameraRequest
 import com.pedro.library.util.sources.video.VideoSource
 
 /**
  * Created by pedro on 6/2/24.
  */
-class CameraUsbSource(context: Context): VideoSource() {
+class CameraUsbSource(private val context: Context): VideoSource() {
 
-  private var cameraClient: CameraClientCustom? = null
-  private val strategy = CameraUvcStrategy(context)
+  private var cameraClient: CameraClient? = null
 
   override fun create(width: Int, height: Int, fps: Int): Boolean {
     this.width = width
@@ -42,8 +40,8 @@ class CameraUsbSource(context: Context): VideoSource() {
 
   override fun start(surfaceTexture: SurfaceTexture) {
     this.surfaceTexture = surfaceTexture
-    cameraClient = CameraClientCustom.newBuilder().apply {
-      setCameraStrategy(strategy)
+    cameraClient = CameraClient.newBuilder(context).apply {
+      setCameraStrategy(CameraUvcStrategy(context))
       setCameraRequest(
         CameraRequest.Builder()
           .setFrontCamera(false)
@@ -54,7 +52,7 @@ class CameraUsbSource(context: Context): VideoSource() {
       openDebug(true)
 
     }.build()
-    cameraClient?.openCamera(this.surfaceTexture!!)
+    cameraClient?.openCamera(this.surfaceTexture!!, width, height)
   }
 
   override fun stop() {
